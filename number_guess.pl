@@ -34,7 +34,7 @@ while ($playing eq "true") {
 	my $number = generateNumber($min, $max);
 	my $correct = "false";
 
-	print "Let's play a number guessing game...\n";
+	print "\n\nLet's play a number guessing game...\n";
 	print "Choose a difficulty:\n";
 	print "1: Easy\n";
 	print "2: Medium\n";
@@ -43,19 +43,24 @@ while ($playing eq "true") {
 	my $difficulty = 1;
 	$difficulty = <STDIN>;
 
+	my $guesses = 0;
+
 	while ($correct eq "false") {
-		print "Guess a number from $min to $max\n";
+		print "\n\nGuess a number from $min to $max\n";
 		print "(Type 'q' to quit)\n";
 
 		my $input = <STDIN>;
 		chomp $input;
+
+		$guesses++;
 
 		if ((lc $input) eq "q") {
 			$playing = "false";
 			print "Goodbye!";
 			last;
 		} elsif ($input == $number ) {
-			print "You are correct!\n";
+			print "\n\nYou are correct! The answer was $number!\n";
+			print "It took you $guesses tries!\n\n";
 			$correct = "true";
 		} elsif (abs($input - $number) < 10 && ($difficulty == 3) ){
 			print "Close! Try again\n";
